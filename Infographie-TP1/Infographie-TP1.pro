@@ -14,10 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    qirrlichtwidget.cpp
+    qirrlichtwidget.cpp \
+    entityTable.cpp \
+    entity.cpp
 
 HEADERS  += mainwindow.hpp \
-    qirrlichtwidget.hpp
+    qirrlichtwidget.hpp \
+    entityTable.hpp \
+    entity.hpp
 
 FORMS    += mainwindow.ui
 

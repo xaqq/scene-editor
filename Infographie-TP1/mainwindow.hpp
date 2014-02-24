@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class EntityTable;
+class QIrrlichtWidget;
 namespace Ui {
 class MainWindow;
 }
@@ -17,9 +19,14 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    EntityTable *entityTable_;
 
 private slots:
     void initIrrlicht();
+    /**
+     * @brief When irrlicht is initiallized;
+     */
+    void onIrrlichtInit(QIrrlichtWidget *);
 };
 
 #endif // MAINWINDOW_HPP
