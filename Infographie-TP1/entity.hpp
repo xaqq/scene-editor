@@ -2,36 +2,65 @@
 #define ENTITY_HPP
 
 
+#include <irrlicht/irrlicht.h>
 #include <QString>
 
+class QIrrlichtWidget;
 
 class Entity
 {
 public:
-    Entity(const QString & name = "Unnamed");
+    Entity(QIrrlichtWidget *w, const QString & name = "Unnamed");
     const QString &name() const
     {
         return name_;
     }
+
     int posX() const
     {
-        return posX_;
+        if (node_)
+            return node_->getPosition().X;
+        return -1;
     }
+
     int posY() const
     {
-        return posY_;
+        if (node_)
+          return  node_->getPosition().Y;
+        return -1;
     }
 
     int posZ() const
     {
-        return posZ_;
+        if (node_)
+            return node_->getPosition().Z;
+        return -1;
     }
 
-private:
+
+    void name(const QString &name)
+    {
+        name_ = name;
+    }
+
+    virtual void loadMesh(QString path);
+    virtual void loadTexture(QString path);
+
+    virtual void buildNode();
+
+    void setPosition(float x, float y, float z);
+    protected:
+
     QString name_;
     int posX_;
     int posY_;
     int posZ_;
+
+
+    QIrrlichtWidget *widget_;
+    /* Irrlicht stuff */
+    irr::scene::ISceneNode *node_;
+    irr::scene::IMesh *mesh_;
 };
 
 #endif // ENTITY_HPP

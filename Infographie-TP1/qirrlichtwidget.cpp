@@ -65,36 +65,13 @@ void QIrrlichtWidget::init ()
     // enfin, on initialise notre moteur de rendu
     device = createDeviceEx (params);
 
-    /* une fois initialisé, on émet le signal onInit, c'est la que nous
-     * ajouterons nos modèles et nos textures.
-     */
-    emit onInit (this);
-
     if (device)
     {
-        // on créé une caméra pour visualiser la scène
-  //      camera = getSceneManager ()->addCameraSceneNode (0, vector3df (0,0,20), vector3df (0,0,0));
-       IAnimatedMesh* mesh = getSceneManager()->getMesh("/home/xaqq/boapclient/BoapClient/Hulk/Hulk.obj");
-           if (!mesh)
-           {
-               device->drop();
-               return;
-           }           IAnimatedMeshSceneNode* node = getSceneManager()->addAnimatedMeshSceneNode( mesh );
-           if (node)
-              {
-                  node->setMaterialFlag(EMF_LIGHTING, false);
-                  node->setMD2Animation(scene::EMAT_STAND);
-                  node->setMaterialTexture( 0, device->getVideoDriver()->getTexture("/home/xaqq/boapclient/BoapClient/Hulk/Hulk_body_diff.tga") );
-               // node->setDebugDataVisible(true);
-           }
-           /*
-           IMeshSceneNode *node2 = getSceneManager()->addMeshSceneNode(getSceneManager()->getGeometryCreator()->createCubeMesh());
-           node2->setDebugDataVisible(true);
-           node2->setMaterialFlag(EMF_LIGHTING, false);
-           node2->setMaterialTexture(0, device->getVideoDriver()->getTexture("/home/xaqq/boapclient/BoapClient/Hulk/rock.jpeg"));
-           node2->setPosition(vector3df(0, 0, -20));*/
+        emit onInit(this);
     }
- qDebug("Created Irrlicht Device");
+    qDebug("Created Irrlicht Device");
+
+
     /* puis on connecte notre slot updateIrrlicht (), qui s'occupe du rendu
      * à notre signal updateIrrlichtQuery ()
      */

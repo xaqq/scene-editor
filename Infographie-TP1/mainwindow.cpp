@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "entityTable.hpp"
 #include "entity.hpp"
+#include "cameraentity.hpp"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,12 +23,24 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::initIrrlicht()
-{ui->irrlichtWidget->init();
+{
+    ui->irrlichtWidget->init();
 }
 
 void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 {
 
-    entityTable_->insert(new Entity("Test"));
+    Entity *camera = new CameraEntity(w, "Camera");
+
+    camera->buildNode();
+    entityTable_->insert(camera);
+
+
+    Entity *e = new Entity(w, "The Hulk ");
+    e->loadMesh("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk.obj");
+
+    e->buildNode();
+    e->loadTexture("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk_body_diff.tga");
+    entityTable_->insert(e);
 
 }
