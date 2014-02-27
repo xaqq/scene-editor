@@ -35,21 +35,46 @@ void MainWindow::setupFormDataMapper()
     mapper.addMapping(ui->posYLineEdit, 2);
     mapper.addMapping(ui->posZLineEdit, 3);
 
+        mapper.addMapping(ui->rotXSlider, 4);
+        mapper.addMapping(ui->rotYSlider, 5);
+        mapper.addMapping(ui->rotZSlider, 6);
+
     connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-             this, SLOT(onObjectRowChanged(QModelIndex)));
+             this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
+
+
+    connect(&mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(mapperIndexChanged(int)));
 }
 
-void MainWindow::onObjectRowChanged(QModelIndex idx)
+
+void MainWindow::mapperIndexChanged(int idx)
 {
-    // manually ignore which columns is selected
+    qDebug(QString("Mapper index changed slot" + QString::number(idx)).toStdString().c_str());
+}
+
+void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex prev)
+{
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
-    for (int i = 0; i < entityTable_->columnCount(); ++i)
+
+    qDebug("Prev and curr:");
+    qDebug(QString::number(prev.row()).toStdString().c_str());
+    qDebug(QString::number(idx.row()).toStdString().c_str());
+  //  if (prev.row() >= 0 && prev.column() >= 0)
+    //    mapper.submit();
+    mapper.setCurrentIndex(idx.row());
+    //mapper.revert();
+
+  /*  for (int i = 0; i < entityTable_->columnCount(); ++i)
     {
         if ( QLineEdit *ptr = dynamic_cast<QLineEdit *>(mapper.mappedWidgetAt(i)))
         {
                     ptr->setText(entityTable_->data(idx.sibling(idx.row(), i)).toString());
+    }      else  if ( QSlider *ptr = dynamic_cast<QSlider *>(mapper.mappedWidgetAt(i)))
+        {
+                    ptr->setValue(entityTable_->data(idx.sibling(idx.row(), i)).toInt());
     }
-    }
+    }*/
+   // mapper.setCurrentIndex(idx.row());
 }
 
 void MainWindow::initIrrlicht()
@@ -96,4 +121,23 @@ void MainWindow::on_actionImporter_un_objet_triggered()
         }
     entityTable_->insert(e);
 
+}
+
+void MainWindow::on_rotXSlider_valueChanged(int value)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
+    ui->entityTableView->update();
+}
+
+void MainWindow::on_rotYSlider_valueChanged(int value)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
+}
+
+void MainWindow::on_rotZSlider_valueChanged(int value)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
 }

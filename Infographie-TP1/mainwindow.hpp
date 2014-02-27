@@ -32,7 +32,12 @@ private slots:
     void onIrrlichtInit(QIrrlichtWidget *);
     void on_actionImporter_un_objet_triggered();
 
-    void onObjectRowChanged(QModelIndex idx);
+    void onObjectRowChanged(QModelIndex idx, QModelIndex prev);
+    void on_rotXSlider_valueChanged(int value);
+    void on_rotYSlider_valueChanged(int value);
+    void on_rotZSlider_valueChanged(int value);
+
+    void mapperIndexChanged(int idx);
 };
 
 #endif // MAINWINDOW_HPP

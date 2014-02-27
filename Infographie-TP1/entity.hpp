@@ -37,6 +37,26 @@ public:
         return -1;
     }
 
+    int rotX() const
+    {
+        if (node_)
+            return node_->getRotation().X;
+        return -1;
+    }
+
+    int rotY() const
+    {
+        if (node_)
+          return  node_->getRotation().Y;
+        return -1;
+    }
+
+    int rotZ() const
+    {
+        if (node_)
+            return node_->getRotation().Z;
+        return -1;
+    }
 
     void name(const QString &name)
     {
@@ -49,6 +69,7 @@ public:
     virtual bool buildNode();
 
     void setPosition(float x, float y, float z);
+    void setRotation(float x, float y, float z);
     protected:
 
     QString name_;

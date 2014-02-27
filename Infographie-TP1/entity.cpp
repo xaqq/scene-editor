@@ -61,3 +61,9 @@ void Entity::setPosition(float x, float y, float z)
     if (node_)
         node_->setPosition(vector3df(x, y, z));
 }
+
+void Entity::setRotation(float x, float y, float z)
+{
+    if (node_)
+        node_->setRotation(vector3df(x, y, z));
+}

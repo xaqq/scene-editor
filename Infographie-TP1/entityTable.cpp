@@ -14,7 +14,7 @@ int EntityTable::rowCount(const QModelIndex &parent) const
 
 int EntityTable::columnCount(const QModelIndex &parent) const
 {
-    return 4;
+    return 7;
 }
 
 QVariant EntityTable::data(const QModelIndex &index, int role) const
@@ -22,7 +22,7 @@ QVariant EntityTable::data(const QModelIndex &index, int role) const
     int row = index.row();
     int col = index.column();
 
-    if (role == Qt::DisplayRole)
+    if (role == Qt::DisplayRole || role == Qt::EditRole)
     {
     Entity *e = entities_.at(row);
 
@@ -36,6 +36,13 @@ QVariant EntityTable::data(const QModelIndex &index, int role) const
      return e->posY();
     case 3: /* z */
      return e->posZ();
+
+    case 4: /* x */
+     return e->rotX();
+    case 5: /* y */
+     return e->rotY();
+    case 6: /* z */
+     return e->rotZ();
     }
     }
     return QVariant();
@@ -50,21 +57,35 @@ QVariant EntityTable::data(const QModelIndex &index, int role) const
       if (role == Qt::EditRole)
       {
       Entity *e = entities_.at(row);
-
+      emit dataChanged(index, index.sibling(index.row(), columnCount()));
       switch (col)
       {
       case 0: /* name */
            e->name(value.toString());
           return true;
+
+
+          /*** Positions ***/
       case 1: /* x */
           e->setPosition(value.toFloat(), e->posY(), e->posZ());
           return true;
       case 2: /* y */
-
           e->setPosition(e->posX(), value.toFloat(), e->posZ());
           return true;
       case 3: /* z */
           e->setPosition(e->posX(), e->posY(), value.toFloat());
+          return true;
+
+
+          /*** Rotation ***/
+      case 4: /* x */
+          e->setRotation(value.toFloat(), e->rotY(), e->rotZ());
+          return true;
+      case 5: /* y */
+          e->setRotation(e->rotX(), value.toFloat(), e->rotZ());
+          return true;
+      case 6: /* z */
+          e->setRotation(e->rotX(), e->rotY(), value.toFloat());
           return true;
       }
       }return false;
@@ -80,11 +101,17 @@ QVariant EntityTable::headerData(int section, Qt::Orientation orientation, int r
             case 0:
                 return QString("Name");
             case 1:
-                return QString("x");
+                return QString("pos x");
             case 2:
-                return QString("y");
+                return QString("pos y");
             case 3:
-                return QString("z");
+                return QString("pos z");
+            case 4:
+                return QString("rot x");
+            case 5:
+                return QString("rot y");
+            case 6:
+                return QString("rot z");
             }
         }
     }
@@ -100,5 +127,10 @@ void EntityTable::insert(Entity *e)
 
 Qt::ItemFlags EntityTable::flags(const QModelIndex & index) const
 {
-    return Qt::ItemIsEditable | Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+    return /*Qt::ItemIsEditable |*/ Qt::ItemIsEnabled | Qt::ItemIsSelectable;
+}
+
+void EntityTable::refresh()
+{
+    emit reset();
 }

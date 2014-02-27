@@ -27,6 +27,8 @@ public:
         return dataMapper_;
     }
 
+    void refresh();
+
 private:
     QList<Entity *> entities_;
     // configuration is done by mainwidget;

@@ -81,15 +81,54 @@
             <property name="enabled">
              <bool>true</bool>
             </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;List of entities in the scene.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAsNeeded</enum>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::SingleSelection</enum>
+            </property>
+            <property name="selectionBehavior">
+             <enum>QAbstractItemView::SelectRows</enum>
+            </property>
+            <property name="horizontalScrollMode">
+             <enum>QAbstractItemView::ScrollPerPixel</enum>
+            </property>
             <property name="cornerButtonEnabled">
              <bool>true</bool>
             </property>
+            <attribute name="horizontalHeaderVisible">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="horizontalHeaderCascadingSectionResizes">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="horizontalHeaderDefaultSectionSize">
+             <number>80</number>
+            </attribute>
+            <attribute name="horizontalHeaderHighlightSections">
+             <bool>true</bool>
+            </attribute>
+            <attribute name="horizontalHeaderMinimumSectionSize">
+             <number>15</number>
+            </attribute>
+            <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+             <bool>false</bool>
+            </attribute>
+            <attribute name="verticalHeaderDefaultSectionSize">
+             <number>20</number>
+            </attribute>
            </widget>
           </item>
           <item>
@@ -117,6 +156,12 @@
              <item row="0" column="1" colspan="3">
               <widget class="QLineEdit" name="objectNameLineEdit"/>
              </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="posXLineEdit"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="posYLineEdit"/>
+             </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_3">
                <property name="text">
@@ -124,46 +169,61 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="posXLineEdit"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLineEdit" name="posYLineEdit"/>
-             </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="posZLineEdit"/>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>Rotation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLineEdit" name="rotXLineEdit"/>
-             </item>
-             <item row="2" column="2">
-              <widget class="QLineEdit" name="rotYLineEdit"/>
-             </item>
-             <item row="2" column="3">
-              <widget class="QLineEdit" name="rotZLineEdit"/>
-             </item>
-             <item row="3" column="0">
+             <item row="4" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Scale</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="4" column="1">
               <widget class="QLineEdit" name="scaleXLineEdit"/>
              </item>
-             <item row="3" column="2">
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="posZLineEdit"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Rotation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
               <widget class="QLineEdit" name="scaleYLineEdit"/>
              </item>
-             <item row="3" column="3">
+             <item row="4" column="3">
               <widget class="QLineEdit" name="scaleZLineEdit_2"/>
+             </item>
+             <item row="3" column="3">
+              <widget class="QSlider" name="rotZSlider">
+               <property name="maximum">
+                <number>360</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QSlider" name="rotYSlider">
+               <property name="maximum">
+                <number>360</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QSlider" name="rotXSlider">
+               <property name="maximum">
+                <number>360</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
