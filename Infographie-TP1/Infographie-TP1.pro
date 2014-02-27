@@ -17,13 +17,15 @@ SOURCES += main.cpp\
     qirrlichtwidget.cpp \
     entityTable.cpp \
     entity.cpp \
-    cameraentity.cpp
+    cameraentity.cpp \
+    animatedentity.cpp
 
 HEADERS  += mainwindow.hpp \
     qirrlichtwidget.hpp \
     entityTable.hpp \
     entity.hpp \
-    cameraentity.hpp
+    cameraentity.hpp \
+    animatedentity.h
 
 FORMS    += mainwindow.ui
 

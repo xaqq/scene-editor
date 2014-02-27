@@ -109,7 +109,7 @@
              <bool>true</bool>
             </property>
             <attribute name="horizontalHeaderVisible">
-             <bool>true</bool>
+             <bool>false</bool>
             </attribute>
             <attribute name="horizontalHeaderCascadingSectionResizes">
              <bool>false</bool>
@@ -172,7 +172,7 @@
              <item row="4" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
-                <string>Scale</string>
+                <string>Scale (%)</string>
                </property>
               </widget>
              </item>
@@ -268,6 +268,7 @@
      <string>Nouveau</string>
     </property>
     <addaction name="actionImporter_un_objet"/>
+    <addaction name="actionSphere"/>
    </widget>
    <addaction name="menuBoap"/>
    <addaction name="menuNouveau"/>
@@ -280,6 +281,11 @@
   <action name="actionImporter_un_objet">
    <property name="text">
     <string>Importer un objet</string>
+   </property>
+  </action>
+  <action name="actionSphere">
+   <property name="text">
+    <string>Sphere</string>
    </property>
   </action>
  </widget>

@@ -38,6 +38,7 @@ private slots:
     void on_rotZSlider_valueChanged(int value);
 
     void mapperIndexChanged(int idx);
+    void on_actionSphere_triggered();
 };
 
 #endif // MAINWINDOW_HPP

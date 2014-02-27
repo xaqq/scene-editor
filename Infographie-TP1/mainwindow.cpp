@@ -7,6 +7,12 @@
 #include <QMessageBox>
 #include <QModelIndex>
 
+using namespace irr;
+using namespace core;
+using namespace scene;
+using namespace video;
+using namespace io;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -123,4 +129,22 @@ void MainWindow::on_rotZSlider_valueChanged(int value)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
+}
+
+void MainWindow::on_actionSphere_triggered()
+{
+    Entity *e = new Entity(ui->irrlichtWidget, "Newly created sphere");
+    IMesh *mesh = ui->irrlichtWidget->getSceneManager()->getGeometryCreator()->createSphereMesh();
+
+    if (!mesh)
+    {
+        delete e;
+       QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a sphere mesh, sorry :(");
+       return ;
+    }
+
+    e->setMesh(mesh);
+    e->buildNode();
+
+    entityTable_->insert(e);
 }

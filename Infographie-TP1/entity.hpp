@@ -62,14 +62,14 @@ public:
     int scaleX() const
     {
         if (node_)
-            return node_->getScale().X;
+            return node_->getScale().X * 100;
         return -1;
     }
 
     int scaleY() const
     {
         if (node_)
-            return node_->getScale().Y;
+            return node_->getScale().Y * 100;
         return -1;
     }
 
@@ -77,7 +77,7 @@ public:
     int scaleZ() const
     {
         if (node_)
-            return node_->getScale().Z;
+            return node_->getScale().Z * 100;
         return -1;
     }
 
@@ -95,6 +95,18 @@ public:
     void setPosition(float x, float y, float z);
     void setRotation(float x, float y, float z);
     void setScale(float x, float y, float z);
+
+
+    void setNode(irr::scene::ISceneNode *node)
+    {
+        node_ = node;
+    }
+
+    void setMesh(irr::scene::IMesh *mesh)
+    {
+        mesh_ = mesh;
+    }
+
     protected:
 
     QString name_;
