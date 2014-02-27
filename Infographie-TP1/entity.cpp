@@ -10,9 +10,6 @@ using namespace io;
 
 Entity::Entity(QIrrlichtWidget *w, const QString &name) :
     name_(name),
-    posX_(0),
-    posY_(0),
-    posZ_(0),
     widget_(w)
 {
 }
@@ -66,4 +63,10 @@ void Entity::setRotation(float x, float y, float z)
 {
     if (node_)
         node_->setRotation(vector3df(x, y, z));
+}
+
+void Entity::setScale(float x, float y, float z)
+{
+    if (node_)
+        node_->setScale(vector3df(x, y, z));
 }

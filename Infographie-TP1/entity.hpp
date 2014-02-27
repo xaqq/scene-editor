@@ -58,6 +58,30 @@ public:
         return -1;
     }
 
+
+    int scaleX() const
+    {
+        if (node_)
+            return node_->getScale().X;
+        return -1;
+    }
+
+    int scaleY() const
+    {
+        if (node_)
+            return node_->getScale().Y;
+        return -1;
+    }
+
+
+    int scaleZ() const
+    {
+        if (node_)
+            return node_->getScale().Z;
+        return -1;
+    }
+
+
     void name(const QString &name)
     {
         name_ = name;
@@ -70,13 +94,10 @@ public:
 
     void setPosition(float x, float y, float z);
     void setRotation(float x, float y, float z);
+    void setScale(float x, float y, float z);
     protected:
 
     QString name_;
-    int posX_;
-    int posY_;
-    int posZ_;
-
 
     QIrrlichtWidget *widget_;
     /* Irrlicht stuff */

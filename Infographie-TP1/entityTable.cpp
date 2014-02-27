@@ -14,7 +14,7 @@ int EntityTable::rowCount(const QModelIndex &parent) const
 
 int EntityTable::columnCount(const QModelIndex &parent) const
 {
-    return 7;
+    return 10;
 }
 
 QVariant EntityTable::data(const QModelIndex &index, int role) const
@@ -43,6 +43,14 @@ QVariant EntityTable::data(const QModelIndex &index, int role) const
      return e->rotY();
     case 6: /* z */
      return e->rotZ();
+
+    case 7: /* x */
+     return e->scaleX();
+    case 8: /* y */
+     return e->scaleY();
+    case 9: /* z */
+     return e->scaleZ();
+
     }
     }
     return QVariant();
@@ -87,6 +95,17 @@ QVariant EntityTable::data(const QModelIndex &index, int role) const
       case 6: /* z */
           e->setRotation(e->rotX(), e->rotY(), value.toFloat());
           return true;
+
+          /*** Scale ***/
+      case 7: /* x */
+          e->setScale(value.toFloat(), e->scaleY(), e->scaleZ());
+          return true;
+      case 8: /* y */
+          e->setScale(e->scaleX(), value.toFloat(), e->scaleZ());
+          return true;
+      case 9: /* z */
+          e->setScale(e->scaleX(), e->scaleY(), value.toFloat());
+          return true;
       }
       }return false;
   }
@@ -112,6 +131,12 @@ QVariant EntityTable::headerData(int section, Qt::Orientation orientation, int r
                 return QString("rot y");
             case 6:
                 return QString("rot z");
+            case 7:
+                return QString("scale x");
+            case 8:
+                return QString("scale y");
+            case 9:
+                return QString("scale z");
             }
         }
     }

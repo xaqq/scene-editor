@@ -39,6 +39,9 @@ void MainWindow::setupFormDataMapper()
         mapper.addMapping(ui->rotYSlider, 5);
         mapper.addMapping(ui->rotZSlider, 6);
 
+        mapper.addMapping(ui->scaleXLineEdit, 7);
+        mapper.addMapping(ui->scaleYLineEdit, 8);
+        mapper.addMapping(ui->scaleZLineEdit, 9);
     connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
              this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
 
@@ -49,32 +52,13 @@ void MainWindow::setupFormDataMapper()
 
 void MainWindow::mapperIndexChanged(int idx)
 {
-    qDebug(QString("Mapper index changed slot" + QString::number(idx)).toStdString().c_str());
+  //  qDebug(QString("Mapper index changed slot" + QString::number(idx)).toStdString().c_str());
 }
 
 void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex prev)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
-
-    qDebug("Prev and curr:");
-    qDebug(QString::number(prev.row()).toStdString().c_str());
-    qDebug(QString::number(idx.row()).toStdString().c_str());
-  //  if (prev.row() >= 0 && prev.column() >= 0)
-    //    mapper.submit();
     mapper.setCurrentIndex(idx.row());
-    //mapper.revert();
-
-  /*  for (int i = 0; i < entityTable_->columnCount(); ++i)
-    {
-        if ( QLineEdit *ptr = dynamic_cast<QLineEdit *>(mapper.mappedWidgetAt(i)))
-        {
-                    ptr->setText(entityTable_->data(idx.sibling(idx.row(), i)).toString());
-    }      else  if ( QSlider *ptr = dynamic_cast<QSlider *>(mapper.mappedWidgetAt(i)))
-        {
-                    ptr->setValue(entityTable_->data(idx.sibling(idx.row(), i)).toInt());
-    }
-    }*/
-   // mapper.setCurrentIndex(idx.row());
 }
 
 void MainWindow::initIrrlicht()
@@ -127,7 +111,6 @@ void MainWindow::on_rotXSlider_valueChanged(int value)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
-    ui->entityTableView->update();
 }
 
 void MainWindow::on_rotYSlider_valueChanged(int value)
