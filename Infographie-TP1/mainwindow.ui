@@ -92,6 +92,82 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QFrame" name="detailedObjectView">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>120</height>
+             </size>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_2">
+               <property name="text">
+                <string>Object name</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" colspan="3">
+              <widget class="QLineEdit" name="objectNameLineEdit"/>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Translation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="posXLineEdit"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="posYLineEdit"/>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="posZLineEdit"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Rotation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="rotXLineEdit"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="rotYLineEdit"/>
+             </item>
+             <item row="2" column="3">
+              <widget class="QLineEdit" name="rotZLineEdit"/>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Scale</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="scaleXLineEdit"/>
+             </item>
+             <item row="3" column="2">
+              <widget class="QLineEdit" name="scaleYLineEdit"/>
+             </item>
+             <item row="3" column="3">
+              <widget class="QLineEdit" name="scaleZLineEdit_2"/>
+             </item>
+            </layout>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -127,11 +203,23 @@
     </property>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuNouveau">
+    <property name="title">
+     <string>Nouveau</string>
+    </property>
+    <addaction name="actionImporter_un_objet"/>
+   </widget>
    <addaction name="menuBoap"/>
+   <addaction name="menuNouveau"/>
   </widget>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionImporter_un_objet">
+   <property name="text">
+    <string>Importer un objet</string>
    </property>
   </action>
  </widget>

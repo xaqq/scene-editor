@@ -18,17 +18,23 @@ Entity::Entity(QIrrlichtWidget *w, const QString &name) :
 }
 
 
-void Entity::loadMesh(QString path)
+bool Entity::loadMesh(QString path)
 {
     mesh_ = (widget_->getSceneManager()->getMesh(path.toStdString().c_str()));
+    if (mesh_)
+        return true;
+    return false;
 }
 
-void Entity::buildNode()
+bool Entity::buildNode()
 {
      node_ = widget_->getSceneManager()->addAnimatedMeshSceneNode( static_cast<scene::IAnimatedMesh *>(mesh_) );
+     if (node_)
+         return true;
+     return false;
 }
 
-void Entity::loadTexture(QString path)
+bool Entity::loadTexture(QString path)
 {
     if (node_)
     {
@@ -37,12 +43,17 @@ void Entity::loadTexture(QString path)
         {
             ptr->setMD2Animation(EMAT_STAND);
         }
+        ITexture *texture = widget_->getVideoDriver()->getTexture(path.toStdString().c_str());
+        if (!texture)
+            return false;
         node_->setMaterialTexture( 0, widget_->getVideoDriver()->getTexture(path.toStdString().c_str()) );
+        return true;
     }
     else
     {
         qDebug("Error !! Tried to load texture, but no node.");
     }
+    return false;
 }
 
 void Entity::setPosition(float x, float y, float z)

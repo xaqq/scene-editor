@@ -4,7 +4,7 @@
 EntityTable::EntityTable(QObject *parent) :
     QAbstractTableModel(parent)
 {
-
+    dataMapper_.setModel(this);
 }
 
 int EntityTable::rowCount(const QModelIndex &parent) const

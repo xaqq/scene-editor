@@ -12,7 +12,7 @@ class CameraEntity : public Entity
 public:
     CameraEntity(QIrrlichtWidget *w, const QString &name = "Camera");
 
-    virtual void buildNode() override;
+    virtual bool buildNode() override;
 
 private:
 };

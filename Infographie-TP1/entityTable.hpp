@@ -2,6 +2,7 @@
 #define ENTITYTABLE_HPP
 
 #include <QAbstractItemModel>
+#include <QDataWidgetMapper>
 #include <QList>
 
 class Entity;
@@ -21,8 +22,15 @@ public:
 
     void insert(Entity *e);
 
+    QDataWidgetMapper &dataMapper()
+    {
+        return dataMapper_;
+    }
+
 private:
     QList<Entity *> entities_;
+    // configuration is done by mainwidget;
+    QDataWidgetMapper dataMapper_;
 };
 
 #endif // ENTITYTABLE_HPP

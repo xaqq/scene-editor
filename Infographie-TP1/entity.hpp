@@ -43,10 +43,10 @@ public:
         name_ = name;
     }
 
-    virtual void loadMesh(QString path);
-    virtual void loadTexture(QString path);
+    virtual bool loadMesh(QString path);
+    virtual bool loadTexture(QString path);
 
-    virtual void buildNode();
+    virtual bool buildNode();
 
     void setPosition(float x, float y, float z);
     protected:
