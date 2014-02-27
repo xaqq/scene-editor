@@ -146,6 +146,19 @@
              <enum>QFrame::Raised</enum>
             </property>
             <layout class="QGridLayout" name="gridLayout">
+             <item row="1" column="2">
+              <widget class="QDoubleSpinBox" name="posYSpinBox">
+               <property name="minimum">
+                <double>-50000.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>50000.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.250000000000000</double>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="label_2">
                <property name="text">
@@ -153,14 +166,8 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1" colspan="3">
-              <widget class="QLineEdit" name="objectNameLineEdit"/>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="posXLineEdit"/>
-             </item>
-             <item row="1" column="2">
-              <widget class="QLineEdit" name="posYLineEdit"/>
+             <item row="5" column="2">
+              <widget class="QLineEdit" name="scaleYLineEdit"/>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_3">
@@ -169,33 +176,14 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="5" column="0">
               <widget class="QLabel" name="label_5">
                <property name="text">
                 <string>Scale (%)</string>
                </property>
               </widget>
              </item>
-             <item row="4" column="1">
-              <widget class="QLineEdit" name="scaleXLineEdit"/>
-             </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="posZLineEdit"/>
-             </item>
-             <item row="3" column="0">
-              <widget class="QLabel" name="label_4">
-               <property name="text">
-                <string>Rotation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="2">
-              <widget class="QLineEdit" name="scaleYLineEdit"/>
-             </item>
              <item row="4" column="3">
-              <widget class="QLineEdit" name="scaleZLineEdit"/>
-             </item>
-             <item row="3" column="3">
               <widget class="QSlider" name="rotZSlider">
                <property name="maximum">
                 <number>360</number>
@@ -205,7 +193,30 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="2">
+             <item row="4" column="1">
+              <widget class="QSlider" name="rotXSlider">
+               <property name="maximum">
+                <number>360</number>
+               </property>
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QLineEdit" name="scaleXLineEdit"/>
+             </item>
+             <item row="5" column="3">
+              <widget class="QLineEdit" name="scaleZLineEdit"/>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Rotation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
               <widget class="QSlider" name="rotYSlider">
                <property name="maximum">
                 <number>360</number>
@@ -215,13 +226,39 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QSlider" name="rotXSlider">
-               <property name="maximum">
-                <number>360</number>
+             <item row="0" column="1" colspan="3">
+              <widget class="QLineEdit" name="objectNameLineEdit"/>
+             </item>
+             <item row="6" column="0">
+              <widget class="QPushButton" name="loadTextureButton">
+               <property name="text">
+                <string>Load texture</string>
                </property>
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QDoubleSpinBox" name="posXSpinBox">
+               <property name="minimum">
+                <double>-50000.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>50000.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.250000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QDoubleSpinBox" name="posZSpinBox">
+               <property name="minimum">
+                <double>-50000.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>50000.000000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.250000000000000</double>
                </property>
               </widget>
              </item>
@@ -269,6 +306,7 @@
     </property>
     <addaction name="actionImporter_un_objet"/>
     <addaction name="actionSphere"/>
+    <addaction name="actionCube"/>
    </widget>
    <addaction name="menuBoap"/>
    <addaction name="menuNouveau"/>
@@ -288,6 +326,11 @@
     <string>Sphere</string>
    </property>
   </action>
+  <action name="actionCube">
+   <property name="text">
+    <string>Cube</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -298,6 +341,20 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>objectNameLineEdit</tabstop>
+  <tabstop>posXSpinBox</tabstop>
+  <tabstop>posYSpinBox</tabstop>
+  <tabstop>posZSpinBox</tabstop>
+  <tabstop>rotXSlider</tabstop>
+  <tabstop>rotYSlider</tabstop>
+  <tabstop>rotZSlider</tabstop>
+  <tabstop>scaleXLineEdit</tabstop>
+  <tabstop>scaleYLineEdit</tabstop>
+  <tabstop>scaleZLineEdit</tabstop>
+  <tabstop>loadTextureButton</tabstop>
+  <tabstop>entityTableView</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>

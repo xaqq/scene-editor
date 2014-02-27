@@ -39,6 +39,11 @@ private slots:
 
     void mapperIndexChanged(int idx);
     void on_actionSphere_triggered();
+    void on_actionCube_triggered();
+    void on_loadTextureButton_clicked();
+    void on_posXSpinBox_valueChanged(double arg1);
+    void on_posYSpinBox_valueChanged(double arg1);
+    void on_posZSpinBox_valueChanged(double arg1);
 };
 
 #endif // MAINWINDOW_HPP

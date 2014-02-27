@@ -159,3 +159,8 @@ void EntityTable::refresh()
 {
     emit reset();
 }
+
+Entity *EntityTable::getEntityAt(int n)
+{
+    return entities_.at(n);
+}

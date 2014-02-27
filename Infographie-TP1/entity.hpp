@@ -16,21 +16,21 @@ public:
         return name_;
     }
 
-    int posX() const
+    float posX() const
     {
         if (node_)
             return node_->getPosition().X;
         return -1;
     }
 
-    int posY() const
+    float posY() const
     {
         if (node_)
           return  node_->getPosition().Y;
         return -1;
     }
 
-    int posZ() const
+    float posZ() const
     {
         if (node_)
             return node_->getPosition().Z;
@@ -87,6 +87,12 @@ public:
         name_ = name;
     }
 
+    /**
+     * @brief loadMesh
+     * Load texture based on based on path. Irrlicht is nice and do caching.
+     * @param path
+     * @return
+     */
     virtual bool loadMesh(QString path);
     virtual bool loadTexture(QString path);
 

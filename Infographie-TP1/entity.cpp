@@ -36,10 +36,6 @@ bool Entity::loadTexture(QString path)
     if (node_)
     {
         node_->setMaterialFlag(EMF_LIGHTING, false);
-        if (auto ptr = dynamic_cast<IAnimatedMeshSceneNode *>(node_))
-        {
-            ptr->setMD2Animation(EMAT_STAND);
-        }
         ITexture *texture = widget_->getVideoDriver()->getTexture(path.toStdString().c_str());
         if (!texture)
             return false;

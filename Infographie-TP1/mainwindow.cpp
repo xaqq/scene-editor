@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QModelIndex>
+#include <QInputDialog>
+#include "animatedentity.h"
 
 using namespace irr;
 using namespace core;
@@ -37,9 +39,9 @@ void MainWindow::setupFormDataMapper()
 
     mapper.addMapping(ui->objectNameLineEdit, 0);
 
-    mapper.addMapping(ui->posXLineEdit, 1);
-    mapper.addMapping(ui->posYLineEdit, 2);
-    mapper.addMapping(ui->posZLineEdit, 3);
+    mapper.addMapping(ui->posXSpinBox, 1);
+    mapper.addMapping(ui->posYSpinBox, 2);
+    mapper.addMapping(ui->posZSpinBox, 3);
 
         mapper.addMapping(ui->rotXSlider, 4);
         mapper.addMapping(ui->rotYSlider, 5);
@@ -81,7 +83,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
     entityTable_->insert(camera);
 
 
-    Entity *e = new Entity(w, "The Hulk ");
+    Entity *e = new AnimatedEntity(w, "The Hulk ");
     e->loadMesh("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk.obj");
 
     e->buildNode();
@@ -134,7 +136,13 @@ void MainWindow::on_rotZSlider_valueChanged(int value)
 void MainWindow::on_actionSphere_triggered()
 {
     Entity *e = new Entity(ui->irrlichtWidget, "Newly created sphere");
-    IMesh *mesh = ui->irrlichtWidget->getSceneManager()->getGeometryCreator()->createSphereMesh();
+
+    bool ok;
+    double radius = QInputDialog::getDouble(this, "Rayon de la sphere", "valeur (ne peut pas etre change plus tard) ", 3, -21474883647, 2147483647, 1, &ok);
+
+    if (!ok)
+        return;
+    IMesh *mesh = ui->irrlichtWidget->getSceneManager()->getGeometryCreator()->createSphereMesh(radius);
 
     if (!mesh)
     {
@@ -147,4 +155,69 @@ void MainWindow::on_actionSphere_triggered()
     e->buildNode();
 
     entityTable_->insert(e);
+    ui->entityTableView->selectRow(entityTable_->rowCount() - 1);
+}
+
+void MainWindow::on_actionCube_triggered()
+{
+
+    Entity *e = new Entity(ui->irrlichtWidget, "Newly created cube");
+
+    bool ok;
+    double x = QInputDialog::getDouble(this, "Creation de cube (1/3)", "x (ne peut pas etre change)", 3, -21474883647, 2147483647, 1, &ok);
+    if (!ok)
+        return;
+    double y = QInputDialog::getDouble(this, "Creation de cube (2/3)", "y (ne peut pas etre change)", 3, -21474883647, 2147483647, 1, &ok);
+    if (!ok)
+        return;
+    double z = QInputDialog::getDouble(this, "Creation de cube (3/3)", "z (ne peut pas etre change)", 3, -21474883647, 2147483647, 1, &ok);
+    if (!ok)
+        return;
+
+    IMesh *mesh = ui->irrlichtWidget->getSceneManager()->getGeometryCreator()->createCubeMesh(irr::core::vector3df(x, y, z));
+
+    if (!mesh)
+    {
+        delete e;
+       QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a cube mesh, sorry :(");
+       return ;
+    }
+
+    e->setMesh(mesh);
+    e->buildNode();
+
+    entityTable_->insert(e);
+    ui->entityTableView->selectRow(entityTable_->rowCount() - 1);
+}
+
+void MainWindow::on_loadTextureButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Texture"),
+                                                     "");
+    qDebug(fileName.toStdString().c_str());
+
+    Entity *e = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
+        if (!e->loadTexture(fileName))
+     {
+            QMessageBox::critical(this, "Error loading texture", "An error occured applying texture.");
+    return ;
+        }
+}
+
+void MainWindow::on_posXSpinBox_valueChanged(double arg1)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
+}
+
+void MainWindow::on_posYSpinBox_valueChanged(double arg1)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
+}
+
+void MainWindow::on_posZSpinBox_valueChanged(double arg1)
+{
+    QDataWidgetMapper &mapper = entityTable_->dataMapper();
+    mapper.submit();
 }
