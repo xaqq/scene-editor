@@ -5,6 +5,7 @@
 #include "cameraentity.hpp"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QDateTime>
 #include <QModelIndex>
 #include <QInputDialog>
 #include "animatedentity.h"
@@ -22,7 +23,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     QTimer::singleShot(1, this, SLOT(initIrrlicht()));
-
     connect(ui->irrlichtWidget, SIGNAL(onInit(QIrrlichtWidget*)), SLOT(onIrrlichtInit(QIrrlichtWidget*)));
     ui->entityTableView->setModel(entityTable_);
             setupFormDataMapper();
@@ -81,6 +81,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 
     camera->buildNode();
     entityTable_->insert(camera);
+    w->setCamera(dynamic_cast<ICameraSceneNode *>(camera->node()));
 
 
     Entity *e = new AnimatedEntity(w, "The Hulk ");
@@ -220,4 +221,10 @@ void MainWindow::on_posZSpinBox_valueChanged(double arg1)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
+}
+
+// screenshot
+void MainWindow::on_actionTake_triggered()
+{
+    ui->irrlichtWidget->screenshot("screenshot-"+QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")+".png");
 }

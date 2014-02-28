@@ -81,10 +81,18 @@ public:
         return -1;
     }
 
+    irr::scene::ISceneNode *node()
+    {
+        return node_;
+    }
 
     void name(const QString &name)
     {
         name_ = name;
+        if (node_)
+        {
+            node_->setName(name.toStdString().c_str());
+        }
     }
 
     /**

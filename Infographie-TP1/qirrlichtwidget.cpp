@@ -1,5 +1,6 @@
 #include "qirrlichtwidget.hpp"
 #include <QTimer>
+#include <QMessageBox>
 
 using namespace irr;
 using namespace core;
@@ -42,6 +43,11 @@ IVideoDriver* QIrrlichtWidget::getVideoDriver () const
 ISceneManager* QIrrlichtWidget::getSceneManager () const
 {
     return device->getSceneManager();
+}
+
+ISceneCollisionManager *QIrrlichtWidget::getCollisionManager() const
+{
+    return device->getSceneManager()->getSceneCollisionManager();
 }
 
 void QIrrlichtWidget::init ()
@@ -137,4 +143,53 @@ void QIrrlichtWidget::resizeEvent (QResizeEvent *ev)
      }
 
     QWidget::resizeEvent (ev);
+}
+
+// this is from irrlicht wiki
+void QIrrlichtWidget::screenshot(const QString &fileName)
+{
+   irr::video::IVideoDriver* const driver = device->getVideoDriver();
+
+   //get image from the last rendered frame
+   irr::video::IImage* const image = driver->createScreenShot();
+   if (image)
+   {
+      //construct a filename, consisting of local time and file extension
+      irr::c8 filename[64];
+      snprintf(filename, 64, "screenshot_%u.png", device->getTimer()->getRealTime());
+
+
+      //write screenshot to file
+      if (!driver->writeImageToFile(image, fileName.toStdString().c_str()))
+         device->getLogger()->log(L"Failed to take screenshot.", irr::ELL_WARNING);
+
+      //Don't forget to drop image since we don't need it anymore.
+      image->drop();
+   }
+}
+
+void QIrrlichtWidget::mousePressEvent(QMouseEvent *e)
+{
+    line3d<f32> ret = getCollisionManager()->getRayFromScreenCoordinates(vector2d<s32>(e->pos().x(), e->pos().y()));
+    qDebug(QString("Mouse coord: " + QString::number(e->pos().x()) + "," + QString::number(e->pos().y())).toStdString().c_str());
+ findWithRaycast(ret);
+}
+
+
+Entity *QIrrlichtWidget::findWithRaycast(line3d<f32> ray)
+{
+    if (!camera)
+    {
+        qDebug("No camera.");
+        return nullptr;
+
+    }          scene::ISceneNode * selectedSceneNode =
+               getCollisionManager()->getSceneNodeFromRayBB(
+                       ray);
+
+    if (selectedSceneNode)
+    {
+        QMessageBox::critical(this, "resultat", "EH GG BIEN VISER: " +
+                              QString(selectedSceneNode->getName()));
+    }
 }

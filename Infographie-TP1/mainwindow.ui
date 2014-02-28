@@ -308,8 +308,15 @@
     <addaction name="actionSphere"/>
     <addaction name="actionCube"/>
    </widget>
+   <widget class="QMenu" name="menuScreenshot">
+    <property name="title">
+     <string>Screenshot</string>
+    </property>
+    <addaction name="actionTake"/>
+   </widget>
    <addaction name="menuBoap"/>
    <addaction name="menuNouveau"/>
+   <addaction name="menuScreenshot"/>
   </widget>
   <action name="actionQuit">
    <property name="text">
@@ -329,6 +336,11 @@
   <action name="actionCube">
    <property name="text">
     <string>Cube</string>
+   </property>
+  </action>
+  <action name="actionTake">
+   <property name="text">
+    <string>Take</string>
    </property>
   </action>
  </widget>

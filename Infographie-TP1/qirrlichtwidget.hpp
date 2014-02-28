@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <irrlicht/irrlicht.h>
 
+class Entity;
 class QIrrlichtWidget : public QWidget
 {
     Q_OBJECT
@@ -21,6 +22,28 @@ class QIrrlichtWidget : public QWidget
         irr::scene::ISceneManager *getSceneManager () const;
 
         void init ();
+
+        /**
+         * @brief takeScreenshot and save it to a file.
+         * @param fileName
+         */
+        void screenshot(const QString &fileName);
+
+        /**
+         * @brief launch a ray from camera en return Entity if hit.
+         * @return
+         */
+        Entity *findWithRaycast(irr::core::line3d<irr::f32> ray);
+
+        irr::scene::ISceneCollisionManager *getCollisionManager() const;
+
+
+        void setCamera(irr::scene::ICameraSceneNode *cam)
+        {
+            camera = cam;
+        }
+
+        void mousePressEvent(QMouseEvent *)override;
 
     signals:
         void onInit (QIrrlichtWidget *irrWidget);

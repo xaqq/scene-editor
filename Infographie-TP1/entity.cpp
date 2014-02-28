@@ -26,8 +26,9 @@ bool Entity::loadMesh(QString path)
 bool Entity::buildNode()
 {
      node_ = widget_->getSceneManager()->addMeshSceneNode(mesh_);
+     name(name()); // dispatch the name to the node;
      if (node_)
-         return true;
+        return true;
      return false;
 }
 

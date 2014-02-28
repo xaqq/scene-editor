@@ -16,6 +16,7 @@ AnimatedEntity::AnimatedEntity(QIrrlichtWidget *w, const QString & name) :
 bool AnimatedEntity::buildNode()
 {
      node_ = widget_->getSceneManager()->addAnimatedMeshSceneNode( static_cast<scene::IAnimatedMesh *>(mesh_) );
+    name(name()); // dispatch the name to the node;
      if (node_)
          return true;
      return false;
