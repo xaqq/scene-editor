@@ -5,12 +5,15 @@
 #include <QModelIndex>
 #include <QItemSelection>
 
+#include <irrlicht/irrlicht.h>
+
 class EntityTable;
 class QIrrlichtWidget;
 namespace Ui {
 class MainWindow;
 }
 
+class Entity;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -23,6 +26,18 @@ private:
     Ui::MainWindow *ui;
     EntityTable *entityTable_;
     void setupFormDataMapper();
+
+public:
+    /**
+      This is used by the QIrrlichtWidget to set the selected entity when doing raycasting.
+     * @brief setSelectedEntity
+     */
+    void setSelectedEntity(Entity *e);
+    /**
+      This is used by the QIrrlichtWidget to set the selected entity when doing raycasting.
+     * @brief setSelectedEntity
+     */
+    void setSelectedNode(irr::scene::ISceneNode *n);
 
 private slots:
     void initIrrlicht();

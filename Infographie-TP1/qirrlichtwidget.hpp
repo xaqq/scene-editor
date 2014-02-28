@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <irrlicht/irrlicht.h>
 
+class MainWindow;
 class Entity;
 class QIrrlichtWidget : public QWidget
 {
@@ -38,6 +39,11 @@ class QIrrlichtWidget : public QWidget
         irr::scene::ISceneCollisionManager *getCollisionManager() const;
 
 
+        void setMainWindow(MainWindow *m) // to set selected entity when raycasting
+        {
+            main_ = m;
+        }
+
         void setCamera(irr::scene::ICameraSceneNode *cam)
         {
             camera = cam;
@@ -61,6 +67,7 @@ class QIrrlichtWidget : public QWidget
     private:
         irr::IrrlichtDevice *device;
         irr::scene::ICameraSceneNode *camera;
+        MainWindow *main_;
 };
 
 #endif // QIRRLICHTWIDGET_HPP

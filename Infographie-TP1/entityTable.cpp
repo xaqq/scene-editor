@@ -164,3 +164,16 @@ Entity *EntityTable::getEntityAt(int n)
 {
     return entities_.at(n);
 }
+
+int EntityTable::entityToIndex(Entity *e)
+{
+    int idx = 0;
+    for (auto ptr : entities_)
+       {
+        if (ptr == e)
+            return idx;
+        idx++;
+}
+    return -1;
+}
+

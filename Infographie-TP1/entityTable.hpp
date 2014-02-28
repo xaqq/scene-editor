@@ -27,6 +27,12 @@ public:
         return dataMapper_;
     }
 
+    int entityToIndex(Entity *e);
+    QList<Entity *>&entities()
+    {
+        return entities_;
+    }
+
     Entity *getEntityAt(int n);
 
     void refresh();

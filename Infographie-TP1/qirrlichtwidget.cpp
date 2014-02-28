@@ -1,6 +1,7 @@
 #include "qirrlichtwidget.hpp"
 #include <QTimer>
 #include <QMessageBox>
+#include "mainwindow.hpp"
 
 using namespace irr;
 using namespace core;
@@ -10,7 +11,8 @@ using namespace io;
 
 QIrrlichtWidget::QIrrlichtWidget (QWidget *parent) :
     QWidget (parent),
-    device (NULL)
+    device (NULL),
+    main_(nullptr)
 {
     // on écrit directement dans la mémoire vidéo du widget
     setAttribute (Qt::WA_PaintOnScreen);
@@ -173,9 +175,17 @@ void QIrrlichtWidget::mousePressEvent(QMouseEvent *e)
     line3d<f32> ret = getCollisionManager()->getRayFromScreenCoordinates(vector2d<s32>(e->pos().x(), e->pos().y()));
     qDebug(QString("Mouse coord: " + QString::number(e->pos().x()) + "," + QString::number(e->pos().y())).toStdString().c_str());
  findWithRaycast(ret);
+
+
 }
 
 
+/**
+ * Use bouding box, therefore its not that precise.
+ * @brief QIrrlichtWidget::findWithRaycast
+ * @param ray
+ * @return
+ */
 Entity *QIrrlichtWidget::findWithRaycast(line3d<f32> ray)
 {
     if (!camera)
@@ -189,7 +199,9 @@ Entity *QIrrlichtWidget::findWithRaycast(line3d<f32> ray)
 
     if (selectedSceneNode)
     {
-        QMessageBox::critical(this, "resultat", "EH GG BIEN VISER: " +
-                              QString(selectedSceneNode->getName()));
+        if (main_)
+        {
+            main_->setSelectedNode(selectedSceneNode);
+        }
     }
 }

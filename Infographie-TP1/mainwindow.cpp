@@ -91,6 +91,8 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
     e->loadTexture("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk_body_diff.tga");
     entityTable_->insert(e);
 
+    w->setMainWindow(this);
+
 }
 
 void MainWindow::on_actionImporter_un_objet_triggered()
@@ -228,3 +230,24 @@ void MainWindow::on_actionTake_triggered()
 {
     ui->irrlichtWidget->screenshot("screenshot-"+QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")+".png");
 }
+
+void MainWindow::setSelectedEntity(Entity *e)
+{
+    if (entityTable_->entityToIndex(e) == -1)
+    {
+        qDebug("Entity not found");
+ return;
+    }
+        ui->entityTableView->selectRow(entityTable_->entityToIndex(e));
+}
+ void MainWindow::setSelectedNode(irr::scene::ISceneNode *n)
+ {
+     for (auto ptr : entityTable_->entities())
+     {
+         if (ptr->node() == n)
+         {
+             setSelectedEntity(ptr);
+     break;
+         }
+     }
+ }
