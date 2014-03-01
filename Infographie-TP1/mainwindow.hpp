@@ -30,6 +30,8 @@ private:
     void setupFormDataMapper();
 
 public:
+
+        bool eventFilter(QObject *target, QEvent *event);
     /**
       This is used by the QIrrlichtWidget to set the selected entity when doing raycasting.
      * @brief setSelectedEntity

@@ -24,8 +24,23 @@ entityTable_(new EntityTable(this))
     ui->setupUi(this);
     QTimer::singleShot(1, this, SLOT(initIrrlicht()));
     connect(ui->irrlichtWidget, SIGNAL(onInit(QIrrlichtWidget*)), SLOT(onIrrlichtInit(QIrrlichtWidget*)));
+    ui->irrlichtWidget->installEventFilter(this);
     ui->entityTableView->setModel(entityTable_);
     setupFormDataMapper();
+}
+
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+    {
+
+
+    if (event->type() == QEvent::Leave ){
+
+        this->setFocus(Qt::ActiveWindowFocusReason);
+        this->grabKeyboard();
+        this->releaseKeyboard();
+    }
+
+    return QMainWindow::eventFilter(target, event);
 }
 
 MainWindow::~MainWindow()
