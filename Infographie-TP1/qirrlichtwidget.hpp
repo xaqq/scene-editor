@@ -63,7 +63,12 @@ class QIrrlichtWidget : public QWidget
         virtual void timerEvent (QTimerEvent *ev);
         virtual void resizeEvent (QResizeEvent *ev);
         virtual void keyPressEvent (QKeyEvent *ev);
-
+        virtual void keyReleaseEvent( QKeyEvent* event );
+        virtual void mouseMoveEvent(QMouseEvent *e);
+        virtual void wheelEvent( QWheelEvent* event );
+               virtual void mouseReleaseEvent( QMouseEvent* event );
+        void sendMouseEventToIrrlicht( QMouseEvent* event, bool pressedDown );
+        void sendKeyEventToIrrlicht( QKeyEvent* event, bool pressedDown );
     private:
         irr::IrrlichtDevice *device;
         irr::scene::ICameraSceneNode *camera;

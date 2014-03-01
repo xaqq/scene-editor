@@ -39,6 +39,7 @@ public:
      */
     void setSelectedNode(irr::scene::ISceneNode *n);
 
+        bool eventFilter(QObject *target, QEvent *event);
 private slots:
     void initIrrlicht();
     /**

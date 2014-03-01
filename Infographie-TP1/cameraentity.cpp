@@ -17,7 +17,7 @@ CameraEntity::CameraEntity(QIrrlichtWidget *w, const QString &name):
 bool CameraEntity::buildNode()
 {
     ICameraSceneNode *camera;
-     node_ = widget_->getSceneManager ()->addCameraSceneNode (0, vector3df (3,3,20), vector3df (3,3,3));
+    node_ = widget_->getSceneManager ()->addCameraSceneNodeFPS();
       name(name()); // dispatch the name to the node;
      if (node_)
          return true;

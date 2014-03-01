@@ -72,8 +72,23 @@ void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex prev)
 void MainWindow::initIrrlicht()
 {
     ui->irrlichtWidget->init();
+    ui->irrlichtWidget->installEventFilter(this);
 }
 
+bool MainWindow::eventFilter(QObject *target, QEvent *event)
+    {
+    if (event->type() == QEvent::Enter){
+          //this->IrrDisplay->MouseInWidget=true;
+    }
+    if (event->type() == QEvent::Leave ){
+        //this->IrrDisplay->MouseInWidget=false;
+        this->setFocus(Qt::ActiveWindowFocusReason);
+        this->grabKeyboard();
+        this->releaseKeyboard();
+    }
+
+    return QMainWindow::eventFilter(target, event);
+}
 void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 {
 
@@ -89,6 +104,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 
     e->buildNode();
     e->loadTexture("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk_body_diff.tga");
+    e->setPosition(0, 0, 10);
     entityTable_->insert(e);
 
     w->setMainWindow(this);
