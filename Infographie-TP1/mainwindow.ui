@@ -72,7 +72,7 @@
              </sizepolicy>
             </property>
             <property name="text">
-             <string>Menu d'edition</string>
+             <string>Appuyez sur X en ciblant un objet pour le selectioner.</string>
             </property>
            </widget>
           </item>

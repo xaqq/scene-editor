@@ -72,23 +72,8 @@ void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex prev)
 void MainWindow::initIrrlicht()
 {
     ui->irrlichtWidget->init();
-    ui->irrlichtWidget->installEventFilter(this);
 }
 
-bool MainWindow::eventFilter(QObject *target, QEvent *event)
-    {
-    if (event->type() == QEvent::Enter){
-          //this->IrrDisplay->MouseInWidget=true;
-    }
-    if (event->type() == QEvent::Leave ){
-        //this->IrrDisplay->MouseInWidget=false;
-        this->setFocus(Qt::ActiveWindowFocusReason);
-        this->grabKeyboard();
-        this->releaseKeyboard();
-    }
-
-    return QMainWindow::eventFilter(target, event);
-}
 void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 {
 

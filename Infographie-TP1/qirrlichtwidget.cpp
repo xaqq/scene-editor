@@ -130,6 +130,15 @@ void QIrrlichtWidget::keyPressEvent (QKeyEvent *ev)
 {
     if ( device != 0 )
           {
+        if (ev->key() == Qt::Key_X)
+        {
+            // send raycast to select object
+            QPoint pos = this->mapFromGlobal(QCursor::pos());
+             line3d<f32> ray = getCollisionManager()->getRayFromScreenCoordinates(vector2d<s32>(pos.x(), pos.y()));
+            findWithRaycast(ray);
+            ev->ignore();
+            return;
+        }
               sendKeyEventToIrrlicht( ev, true );
           }
           ev->ignore();
