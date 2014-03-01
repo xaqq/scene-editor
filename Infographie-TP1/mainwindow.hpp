@@ -51,7 +51,6 @@ private slots:
     void on_rotYSlider_valueChanged(int value);
     void on_rotZSlider_valueChanged(int value);
 
-    void mapperIndexChanged(int idx);
     void on_actionSphere_triggered();
     void on_actionCube_triggered();
     void on_loadTextureButton_clicked();

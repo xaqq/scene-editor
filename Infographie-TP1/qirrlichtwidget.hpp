@@ -34,7 +34,7 @@ class QIrrlichtWidget : public QWidget
          * @brief launch a ray from camera en return Entity if hit.
          * @return
          */
-        Entity *findWithRaycast(irr::core::line3d<irr::f32> ray);
+        void findWithRaycast(irr::core::line3d<irr::f32> ray);
 
         irr::scene::ISceneCollisionManager *getCollisionManager() const;
 

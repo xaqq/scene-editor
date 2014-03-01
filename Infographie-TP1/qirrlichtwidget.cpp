@@ -90,7 +90,7 @@ void QIrrlichtWidget::init ()
     startTimer (0);
 }
 
-void QIrrlichtWidget::updateIrrlicht (QIrrlichtWidget *irrWidget)
+void QIrrlichtWidget::updateIrrlicht (QIrrlichtWidget *)
 {
     if (device)
     {
@@ -104,7 +104,7 @@ void QIrrlichtWidget::updateIrrlicht (QIrrlichtWidget *irrWidget)
     }
 }
 
-void QIrrlichtWidget::paintEvent (QPaintEvent *ev)
+void QIrrlichtWidget::paintEvent (QPaintEvent *)
 {
     if (device)
     {
@@ -287,16 +287,13 @@ irrEvent.MouseInput.Event = irr::EMIE_MOUSE_MOVED;
 
 /**
  * Use bouding box, therefore its not that precise.
- * @brief QIrrlichtWidget::findWithRaycast
- * @param ray
- * @return
  */
-Entity *QIrrlichtWidget::findWithRaycast(line3d<f32> ray)
+void QIrrlichtWidget::findWithRaycast(line3d<f32> ray)
 {
     if (!camera)
     {
         qDebug("No camera.");
-        return nullptr;
+        return;
 
     }          scene::ISceneNode * selectedSceneNode =
                getCollisionManager()->getSceneNodeFromRayBB(

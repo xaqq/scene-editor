@@ -53,17 +53,9 @@ void MainWindow::setupFormDataMapper()
     connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
              this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
 
-
-    connect(&mapper, SIGNAL(currentIndexChanged(int)), this, SLOT(mapperIndexChanged(int)));
 }
 
-
-void MainWindow::mapperIndexChanged(int idx)
-{
-  //  qDebug(QString("Mapper index changed slot" + QString::number(idx)).toStdString().c_str());
-}
-
-void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex prev)
+void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex /*prev*/)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.setCurrentIndex(idx.row());
@@ -119,19 +111,19 @@ void MainWindow::on_actionImporter_un_objet_triggered()
 
 }
 
-void MainWindow::on_rotXSlider_valueChanged(int value)
+void MainWindow::on_rotXSlider_valueChanged(int)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
 }
 
-void MainWindow::on_rotYSlider_valueChanged(int value)
+void MainWindow::on_rotYSlider_valueChanged(int)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
 }
 
-void MainWindow::on_rotZSlider_valueChanged(int value)
+void MainWindow::on_rotZSlider_valueChanged(int)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
@@ -208,19 +200,19 @@ void MainWindow::on_loadTextureButton_clicked()
         }
 }
 
-void MainWindow::on_posXSpinBox_valueChanged(double arg1)
+void MainWindow::on_posXSpinBox_valueChanged(double)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
 }
 
-void MainWindow::on_posYSpinBox_valueChanged(double arg1)
+void MainWindow::on_posYSpinBox_valueChanged(double)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
 }
 
-void MainWindow::on_posZSpinBox_valueChanged(double arg1)
+void MainWindow::on_posZSpinBox_valueChanged(double)
 {
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();

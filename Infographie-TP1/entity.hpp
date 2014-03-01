@@ -11,6 +11,7 @@ class Entity
 {
 public:
     Entity(QIrrlichtWidget *w, const QString & name = "Unnamed");
+    virtual ~Entity() {}
     const QString &name() const
     {
         return name_;
