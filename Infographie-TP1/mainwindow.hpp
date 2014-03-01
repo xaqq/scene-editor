@@ -9,11 +9,13 @@
 
 class EntityTable;
 class QIrrlichtWidget;
-namespace Ui {
-class MainWindow;
+namespace Ui
+{
+    class MainWindow;
 }
 
 class Entity;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

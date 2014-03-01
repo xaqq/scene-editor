@@ -9,7 +9,6 @@ public:
     AnimatedEntity(QIrrlichtWidget *w, const QString & name = "Unnamed");
 
     virtual bool loadTexture(QString path);
-
     virtual bool buildNode();
 };
 

@@ -11,7 +11,11 @@ class Entity
 {
 public:
     Entity(QIrrlichtWidget *w, const QString & name = "Unnamed");
-    virtual ~Entity() {}
+
+    virtual ~Entity()
+    {
+    }
+
     const QString &name() const
     {
         return name_;
@@ -27,7 +31,7 @@ public:
     float posY() const
     {
         if (node_)
-          return  node_->getPosition().Y;
+            return node_->getPosition().Y;
         return -1;
     }
 
@@ -48,7 +52,7 @@ public:
     int rotY() const
     {
         if (node_)
-          return  node_->getRotation().Y;
+            return node_->getRotation().Y;
         return -1;
     }
 
@@ -58,7 +62,6 @@ public:
             return node_->getRotation().Z;
         return -1;
     }
-
 
     int scaleX() const
     {
@@ -73,7 +76,6 @@ public:
             return node_->getScale().Y * 100;
         return -1;
     }
-
 
     int scaleZ() const
     {
@@ -111,7 +113,6 @@ public:
     void setRotation(float x, float y, float z);
     void setScale(float x, float y, float z);
 
-
     void setNode(irr::scene::ISceneNode *node)
     {
         node_ = node;
@@ -122,7 +123,7 @@ public:
         mesh_ = mesh;
     }
 
-    protected:
+protected:
 
     QString name_;
 

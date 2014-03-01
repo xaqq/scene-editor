@@ -17,15 +17,15 @@ using namespace video;
 using namespace io;
 
 MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    entityTable_(new EntityTable(this))
+QMainWindow(parent),
+ui(new Ui::MainWindow),
+entityTable_(new EntityTable(this))
 {
     ui->setupUi(this);
     QTimer::singleShot(1, this, SLOT(initIrrlicht()));
     connect(ui->irrlichtWidget, SIGNAL(onInit(QIrrlichtWidget*)), SLOT(onIrrlichtInit(QIrrlichtWidget*)));
     ui->entityTableView->setModel(entityTable_);
-            setupFormDataMapper();
+    setupFormDataMapper();
 }
 
 MainWindow::~MainWindow()
@@ -43,15 +43,15 @@ void MainWindow::setupFormDataMapper()
     mapper.addMapping(ui->posYSpinBox, 2);
     mapper.addMapping(ui->posZSpinBox, 3);
 
-        mapper.addMapping(ui->rotXSlider, 4);
-        mapper.addMapping(ui->rotYSlider, 5);
-        mapper.addMapping(ui->rotZSlider, 6);
+    mapper.addMapping(ui->rotXSlider, 4);
+    mapper.addMapping(ui->rotYSlider, 5);
+    mapper.addMapping(ui->rotZSlider, 6);
 
-        mapper.addMapping(ui->scaleXLineEdit, 7);
-        mapper.addMapping(ui->scaleYLineEdit, 8);
-        mapper.addMapping(ui->scaleZLineEdit, 9);
-    connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex,QModelIndex)),
-             this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
+    mapper.addMapping(ui->scaleXLineEdit, 7);
+    mapper.addMapping(ui->scaleYLineEdit, 8);
+    mapper.addMapping(ui->scaleZLineEdit, 9);
+    connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
+            this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
 
 }
 
@@ -73,7 +73,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 
     camera->buildNode();
     entityTable_->insert(camera);
-    w->setCamera(dynamic_cast<ICameraSceneNode *>(camera->node()));
+    w->setCamera(dynamic_cast<ICameraSceneNode *> (camera->node()));
 
 
     Entity *e = new AnimatedEntity(w, "The Hulk ");
@@ -91,7 +91,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
 void MainWindow::on_actionImporter_un_objet_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Create from model"),
-                                                     "");
+            "");
     qDebug(fileName.toStdString().c_str());
 
     Entity *e = new Entity(ui->irrlichtWidget, "Newly created entity");
@@ -99,14 +99,14 @@ void MainWindow::on_actionImporter_un_objet_triggered()
     {
         delete e;
         QMessageBox::critical(this, "Error loading mesh", "An error occured creating object from your file.");
-    return;
+        return;
     }
-        if (!e->buildNode())
-     {
-            delete e;
-            QMessageBox::critical(this, "Error loading mesh", "An error occured creating building your node.");
-    return ;
-        }
+    if (!e->buildNode())
+    {
+        delete e;
+        QMessageBox::critical(this, "Error loading mesh", "An error occured creating building your node.");
+        return;
+    }
     entityTable_->insert(e);
 
 }
@@ -143,8 +143,8 @@ void MainWindow::on_actionSphere_triggered()
     if (!mesh)
     {
         delete e;
-       QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a sphere mesh, sorry :(");
-       return ;
+        QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a sphere mesh, sorry :(");
+        return;
     }
 
     e->setMesh(mesh);
@@ -175,8 +175,8 @@ void MainWindow::on_actionCube_triggered()
     if (!mesh)
     {
         delete e;
-       QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a cube mesh, sorry :(");
-       return ;
+        QMessageBox::critical(this, "Error creating mesh", "An error occured while creating a cube mesh, sorry :(");
+        return;
     }
 
     e->setMesh(mesh);
@@ -189,15 +189,15 @@ void MainWindow::on_actionCube_triggered()
 void MainWindow::on_loadTextureButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Texture"),
-                                                     "");
+            "");
     qDebug(fileName.toStdString().c_str());
 
     Entity *e = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
-        if (!e->loadTexture(fileName))
-     {
-            QMessageBox::critical(this, "Error loading texture", "An error occured applying texture.");
-    return ;
-        }
+    if (!e->loadTexture(fileName))
+    {
+        QMessageBox::critical(this, "Error loading texture", "An error occured applying texture.");
+        return;
+    }
 }
 
 void MainWindow::on_posXSpinBox_valueChanged(double)
@@ -219,9 +219,10 @@ void MainWindow::on_posZSpinBox_valueChanged(double)
 }
 
 // screenshot
+
 void MainWindow::on_actionTake_triggered()
 {
-    ui->irrlichtWidget->screenshot("screenshot-"+QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss")+".png");
+    ui->irrlichtWidget->screenshot("screenshot-" + QDateTime::currentDateTime().toString("dd.MM.yyyy hh:mm:ss") + ".png");
 }
 
 void MainWindow::setSelectedEntity(Entity *e)
@@ -229,18 +230,19 @@ void MainWindow::setSelectedEntity(Entity *e)
     if (entityTable_->entityToIndex(e) == -1)
     {
         qDebug("Entity not found");
- return;
+        return;
     }
-        ui->entityTableView->selectRow(entityTable_->entityToIndex(e));
+    ui->entityTableView->selectRow(entityTable_->entityToIndex(e));
 }
- void MainWindow::setSelectedNode(irr::scene::ISceneNode *n)
- {
-     for (auto ptr : entityTable_->entities())
-     {
-         if (ptr->node() == n)
-         {
-             setSelectedEntity(ptr);
-     break;
-         }
-     }
- }
+
+void MainWindow::setSelectedNode(irr::scene::ISceneNode *n)
+{
+    for (auto ptr : entityTable_->entities())
+    {
+        if (ptr->node() == n)
+        {
+            setSelectedEntity(ptr);
+            break;
+        }
+    }
+}

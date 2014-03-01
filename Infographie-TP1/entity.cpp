@@ -7,13 +7,11 @@ using namespace scene;
 using namespace video;
 using namespace io;
 
-
 Entity::Entity(QIrrlichtWidget *w, const QString &name) :
-    name_(name),
-    widget_(w)
+name_(name),
+widget_(w)
 {
 }
-
 
 bool Entity::loadMesh(QString path)
 {
@@ -25,11 +23,11 @@ bool Entity::loadMesh(QString path)
 
 bool Entity::buildNode()
 {
-     node_ = widget_->getSceneManager()->addMeshSceneNode(mesh_);
-     name(name()); // dispatch the name to the node;
-     if (node_)
+    node_ = widget_->getSceneManager()->addMeshSceneNode(mesh_);
+    name(name()); // dispatch the name to the node;
+    if (node_)
         return true;
-     return false;
+    return false;
 }
 
 bool Entity::loadTexture(QString path)
@@ -40,7 +38,7 @@ bool Entity::loadTexture(QString path)
         ITexture *texture = widget_->getVideoDriver()->getTexture(path.toStdString().c_str());
         if (!texture)
             return false;
-        node_->setMaterialTexture( 0, widget_->getVideoDriver()->getTexture(path.toStdString().c_str()) );
+        node_->setMaterialTexture(0, widget_->getVideoDriver()->getTexture(path.toStdString().c_str()));
         return true;
     }
     else

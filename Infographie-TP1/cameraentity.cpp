@@ -9,16 +9,16 @@ using namespace scene;
 using namespace video;
 using namespace io;
 
-CameraEntity::CameraEntity(QIrrlichtWidget *w, const QString &name):
-    Entity(w, name)
+CameraEntity::CameraEntity(QIrrlichtWidget *w, const QString &name) :
+Entity(w, name)
 {
 }
 
 bool CameraEntity::buildNode()
 {
-    node_ = widget_->getSceneManager ()->addCameraSceneNodeFPS();
-      name(name()); // dispatch the name to the node;
-     if (node_)
-         return true;
-     return false;
+    node_ = widget_->getSceneManager()->addCameraSceneNodeFPS();
+    name(name()); // dispatch the name to the node;
+    if (node_)
+        return true;
+    return false;
 }
