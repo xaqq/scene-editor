@@ -77,8 +77,13 @@ void QIrrlichtWidget::init()
     if (device)
     {
         emit onInit(this);
+            qDebug("Created Irrlicht Device");
     }
-    qDebug("Created Irrlicht Device");
+    else
+    {
+        QMessageBox::critical(this, "Fatal Error", "An error occured creating Irrlicht Device (OpenGL)");
+        exit(-1);
+    }
 
 
     /* puis on connecte notre slot updateIrrlicht (), qui s'occupe du rendu
@@ -279,7 +284,7 @@ void QIrrlichtWidget::sendMouseEventToIrrlicht(QMouseEvent* event, bool pressedD
             return; // Cannot handle this mouse event
     }
 
-    irrEvent.MouseInput.Event = irr::EMIE_MOUSE_MOVED;
+  //  irrEvent.MouseInput.Event = irr::EMIE_MOUSE_MOVED;
     irrEvent.MouseInput.X = event->x();
     irrEvent.MouseInput.Y = event->y();
     irrEvent.MouseInput.Wheel = 0.0f;

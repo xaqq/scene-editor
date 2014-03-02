@@ -99,6 +99,7 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
     e->setPosition(0, 0, 10);
     entityTable_->insert(e);
 
+    w->installEventFilter(this);
     w->setMainWindow(this);
 
 }
