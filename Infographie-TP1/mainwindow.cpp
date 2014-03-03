@@ -67,7 +67,6 @@ void MainWindow::setupFormDataMapper()
     mapper.addMapping(ui->scaleZLineEdit, 9);
     connect(ui->entityTableView->selectionModel(), SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
             this, SLOT(onObjectRowChanged(QModelIndex, QModelIndex)));
-
 }
 
 void MainWindow::onObjectRowChanged(QModelIndex idx, QModelIndex /*prev*/)
@@ -87,17 +86,9 @@ void MainWindow::onIrrlichtInit(QIrrlichtWidget *w)
     Entity *camera = new CameraEntity(w, "Camera");
 
     camera->buildNode();
+    camera->setPosition(0, 0, -10.f);
     entityTable_->insert(camera);
     w->setCamera(dynamic_cast<ICameraSceneNode *> (camera->node()));
-
-
-    Entity *e = new AnimatedEntity(w, "The Hulk ");
-    e->loadMesh("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk.obj");
-
-    e->buildNode();
-    e->loadTexture("/home/xaqq/Documents/Infographie/Infographie-TP1/resources/Hulk/Hulk_body_diff.tga");
-    e->setPosition(0, 0, 10);
-    entityTable_->insert(e);
 
     w->installEventFilter(this);
     w->setMainWindow(this);
@@ -209,6 +200,11 @@ void MainWindow::on_loadTextureButton_clicked()
     qDebug(fileName.toStdString().c_str());
 
     Entity *e = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
+    if (!e)
+    {
+        QMessageBox::critical(this, "No object selected", "Cannot apply a texture to nothing.");
+        return;
+    }
     if (!e->loadTexture(fileName))
     {
         QMessageBox::critical(this, "Error loading texture", "An error occured applying texture.");

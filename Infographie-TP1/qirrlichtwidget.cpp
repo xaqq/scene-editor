@@ -176,7 +176,6 @@ void QIrrlichtWidget::resizeEvent(QResizeEvent *ev)
 }
 
 // this is from irrlicht wiki
-
 void QIrrlichtWidget::screenshot(const QString &fileName)
 {
     irr::video::IVideoDriver * const driver = device->getVideoDriver();

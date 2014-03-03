@@ -161,7 +161,9 @@ void EntityTable::refresh()
 
 Entity *EntityTable::getEntityAt(int n)
 {
+    if (n >= 0)
     return entities_.at(n);
+    return nullptr;
 }
 
 int EntityTable::entityToIndex(Entity *e)
