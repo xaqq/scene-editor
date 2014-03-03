@@ -29,6 +29,8 @@ private:
     EntityTable *entityTable_;
     void setupFormDataMapper();
 
+    void addObjectAndSelect(Entity *e);
+
 public:
 
         bool eventFilter(QObject *target, QEvent *event);

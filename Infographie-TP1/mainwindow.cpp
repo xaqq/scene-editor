@@ -114,8 +114,7 @@ void MainWindow::on_actionImporter_un_objet_triggered()
         QMessageBox::critical(this, "Error loading mesh", "An error occured creating building your node.");
         return;
     }
-    entityTable_->insert(e);
-
+     addObjectAndSelect(e);
 }
 
 void MainWindow::on_rotXSlider_valueChanged(int)
@@ -156,9 +155,7 @@ void MainWindow::on_actionSphere_triggered()
 
     e->setMesh(mesh);
     e->buildNode();
-
-    entityTable_->insert(e);
-    ui->entityTableView->selectRow(entityTable_->rowCount() - 1);
+    addObjectAndSelect(e);
 }
 
 void MainWindow::on_actionCube_triggered()
@@ -189,6 +186,11 @@ void MainWindow::on_actionCube_triggered()
     e->setMesh(mesh);
     e->buildNode();
 
+    addObjectAndSelect(e);
+}
+
+void MainWindow::addObjectAndSelect(Entity *e)
+{
     Entity *parent = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
     if (ui->actionAdd_as_child->isChecked() && parent) {
         parent->addChild(e);
@@ -196,7 +198,9 @@ void MainWindow::on_actionCube_triggered()
 
     entityTable_->insert(e);
     ui->entityTableView->selectRow(entityTable_->rowCount() - 1);
+
 }
+
 
 void MainWindow::on_loadTextureButton_clicked()
 {
