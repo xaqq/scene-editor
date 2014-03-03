@@ -123,6 +123,13 @@ public:
         mesh_ = mesh;
     }
 
+    // wrapper to irrlicht
+    void addChild(Entity *child)
+    {
+        if (node_)
+            node_->addChild(child->node());
+    }
+
 protected:
 
     QString name_;

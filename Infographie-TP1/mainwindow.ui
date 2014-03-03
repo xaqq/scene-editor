@@ -307,6 +307,7 @@
     <addaction name="actionImporter_un_objet"/>
     <addaction name="actionSphere"/>
     <addaction name="actionCube"/>
+    <addaction name="actionAdd_as_child"/>
    </widget>
    <widget class="QMenu" name="menuScreenshot">
     <property name="title">
@@ -341,6 +342,14 @@
   <action name="actionTake">
    <property name="text">
     <string>Take</string>
+   </property>
+  </action>
+  <action name="actionAdd_as_child">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Cree en tant que fils</string>
    </property>
   </action>
  </widget>

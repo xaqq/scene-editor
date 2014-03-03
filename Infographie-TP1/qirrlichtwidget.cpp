@@ -99,7 +99,6 @@ void QIrrlichtWidget::updateIrrlicht(QIrrlichtWidget *)
 {
     if (device)
     {
-
         // Draw the scene
         device->getTimer()->tick();
         SColor color(255, 100, 100, 140);
@@ -205,13 +204,6 @@ void QIrrlichtWidget::mousePressEvent(QMouseEvent *event)
         sendMouseEventToIrrlicht(event, true);
     }
     event->ignore();
-
-    /*
-    line3d<f32> ret = getCollisionManager()->getRayFromScreenCoordinates(vector2d<s32>(e->pos().x(), e->pos().y()));
-    qDebug(QString("Mouse coord: " + QString::number(e->pos().x()) + "," + QString::number(e->pos().y())).toStdString().c_str());
- findWithRaycast(ret);
-     */
-
 }
 
 void QIrrlichtWidget::mouseReleaseEvent(QMouseEvent* event)

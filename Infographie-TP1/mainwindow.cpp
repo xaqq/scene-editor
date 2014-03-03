@@ -189,6 +189,11 @@ void MainWindow::on_actionCube_triggered()
     e->setMesh(mesh);
     e->buildNode();
 
+    Entity *parent = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
+    if (ui->actionAdd_as_child->isChecked() && parent) {
+        parent->addChild(e);
+    }
+
     entityTable_->insert(e);
     ui->entityTableView->selectRow(entityTable_->rowCount() - 1);
 }
@@ -229,8 +234,6 @@ void MainWindow::on_posZSpinBox_valueChanged(double)
     QDataWidgetMapper &mapper = entityTable_->dataMapper();
     mapper.submit();
 }
-
-// screenshot
 
 void MainWindow::on_actionTake_triggered()
 {
