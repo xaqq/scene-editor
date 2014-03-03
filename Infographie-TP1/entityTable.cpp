@@ -17,6 +17,12 @@ int EntityTable::columnCount(const QModelIndex &parent) const
     return 10;
 }
 
+void EntityTable::remove(Entity *e)
+{
+    entities_.removeAll(e);
+    refresh();
+}
+
 QVariant EntityTable::data(const QModelIndex &index, int role) const
 {
     int row = index.row();

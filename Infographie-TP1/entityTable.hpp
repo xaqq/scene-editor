@@ -36,6 +36,8 @@ public:
 
     Entity *getEntityAt(int n);
 
+    void remove(Entity *e);
+
     void refresh();
 
 private:

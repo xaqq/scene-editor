@@ -265,3 +265,17 @@ void MainWindow::setSelectedNode(irr::scene::ISceneNode *n)
         }
     }
 }
+
+/**
+ * Handle object deletion
+ * @brief MainWindow::on_pushButton_clicked
+ */
+void MainWindow::on_pushButton_clicked()
+{
+    Entity *current = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
+    if (current)
+    {
+        entityTable_->remove(current);
+        current->remove();
+    }
+}

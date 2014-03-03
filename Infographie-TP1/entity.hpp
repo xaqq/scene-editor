@@ -130,6 +130,8 @@ public:
             node_->addChild(child->node());
     }
 
+    void remove();
+
 protected:
 
     QString name_;

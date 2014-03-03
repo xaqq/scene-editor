@@ -30,6 +30,16 @@ bool Entity::buildNode()
     return false;
 }
 
+void Entity::remove()
+{
+    if (node_)
+    {
+        for (auto child : node_->getChildren())
+            child->setParent(widget_->getSceneManager()->getRootSceneNode());
+        node_->remove();
+    }
+}
+
 bool Entity::loadTexture(QString path)
 {
     if (node_)

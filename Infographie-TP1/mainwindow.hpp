@@ -64,6 +64,7 @@ private slots:
     void on_posYSpinBox_valueChanged(double arg1);
     void on_posZSpinBox_valueChanged(double arg1);
     void on_actionTake_triggered();
+    void on_pushButton_clicked();
 };
 
 #endif // MAINWINDOW_HPP
