@@ -99,8 +99,8 @@ void MainWindow::on_actionImporter_un_objet_triggered()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Create from model"),
             "");
-    qDebug(fileName.toStdString().c_str());
-
+    if (fileName.isEmpty())
+        return;
     Entity *e = new Entity(ui->irrlichtWidget, "Newly created entity");
     if (!e->loadMesh(fileName))
     {
@@ -197,8 +197,8 @@ void MainWindow::on_loadTextureButton_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Texture"),
             "");
-    qDebug(fileName.toStdString().c_str());
-
+    if (fileName.isEmpty())
+        return;
     Entity *e = entityTable_->getEntityAt(entityTable_->dataMapper().currentIndex());
     if (!e)
     {
